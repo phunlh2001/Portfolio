@@ -2,14 +2,57 @@
 
 import { useRef, useLayoutEffect } from "react";
 import { gsap } from "gsap";
-import { Card, CardContent } from "@/components/ui/card";
+import { 
+  Database, 
+  Server, 
+  Code, 
+  FileCode, 
+  GitBranch, 
+  RefreshCw, 
+  Terminal, 
+  Webhook, 
+  Package,
+  Braces,
+  GitCommit,
+  Bot,
+  Figma,
+  CheckSquare
+} from "lucide-react";
 
-const mainSkills = ["NodeJS", "JavaScript", "TypeScript", "SQL", "MongoDB", "React", "Next.js", "HTML5", "CSS3"];
-const extraSkills = ["Python", "Java", "C++", "Docker", "Git", "CI/CD", "Linux", "REST API", "GraphQL"];
-const tools = ["VS Code", "Postman", "Jira", "Figma", "Notion", "GitHub", "GitLab"];
+const mainSkills = [
+  { name: "NodeJS", icon: <Server size={48} /> },
+  { name: "JavaScript", icon: <FileCode size={48} /> },
+  { name: "TypeScript", icon: <Braces size={48} /> },
+  { name: "SQL", icon: <Database size={48} /> },
+  { name: "MongoDB", icon: <Database size={48} /> },
+  { name: "React", icon: <Code size={48} /> },
+  { name: "Next.js", icon: <Code size={48} /> },
+  { name: "HTML5", icon: <FileCode size={48} /> },
+  { name: "CSS3", icon: <FileCode size={48} /> },
+];
+const extraSkills = [
+  { name: "Python", icon: <FileCode size={48} /> },
+  { name: "Java", icon: <FileCode size={48} /> },
+  { name: "C++", icon: <FileCode size={48} /> },
+  { name: "Docker", icon: <Package size={48} /> },
+  { name: "Git", icon: <GitBranch size={48} /> },
+  { name: "CI/CD", icon: <RefreshCw size={48} /> },
+  { name: "Linux", icon: <Terminal size={48} /> },
+  { name: "REST API", icon: <Webhook size={48} /> },
+  { name: "GraphQL", icon: <GitCommit size={48} /> },
+];
+const tools = [
+  { name: "VS Code", icon: <Code size={48} /> },
+  { name: "Postman", icon: <Webhook size={48} /> },
+  { name: "Jira", icon: <CheckSquare size={48} /> },
+  { name: "Figma", icon: <Figma size={48} /> },
+  { name: "Notion", icon: <CheckSquare size={48} /> },
+  { name: "GitHub", icon: <GitBranch size={48} /> },
+  { name: "GitLab", icon: <GitBranch size={48} /> },
+];
 
 interface SkillCarouselProps {
-  skills: string[];
+  skills: { name: string; icon: React.ReactNode }[];
   title: string;
   direction?: "forward" | "backward";
 }
@@ -22,11 +65,10 @@ function SkillCarousel({ skills, title, direction = "forward" }: SkillCarouselPr
     if (!carousel) return;
     
     const items = Array.from(carousel.children) as HTMLDivElement[];
+    if (items.length === 0) return;
     const totalWidth = items.reduce((acc, item) => acc + item.offsetWidth, 0) / 2;
 
     gsap.set(carousel, { x: 0 });
-
-    const mod = gsap.utils.wrap(0, -totalWidth);
 
     const timeline = gsap.timeline({
         repeat: -1,
@@ -35,7 +77,7 @@ function SkillCarousel({ skills, title, direction = "forward" }: SkillCarouselPr
     
     timeline.to(carousel, {
       x: direction === 'forward' ? `-=${totalWidth}` : `+=${totalWidth}`,
-      duration: 30,
+      duration: 40,
       ease: "none",
     });
 
@@ -47,23 +89,26 @@ function SkillCarousel({ skills, title, direction = "forward" }: SkillCarouselPr
 
   return (
     <div className="mb-12">
-      <h3 className="text-2xl font-semibold mb-4 text-center">{title}</h3>
-      <div className="overflow-hidden whitespace-nowrap">
+      <h3 className="text-2xl font-semibold mb-6 text-center">{title}</h3>
+      <div className="overflow-hidden whitespace-nowrap group relative">
         <div ref={carouselRef} className="flex">
           {[...skills, ...skills].map((skill, index) => (
             <div
-              key={index}
-              className="p-2 shrink-0"
-              style={{ minWidth: '150px' }}
+              key={`${skill.name}-${index}`}
+              className="p-4 shrink-0"
+              style={{ minWidth: '120px' }}
             >
-              <Card className="transition-transform duration-300 hover:scale-105 hover:shadow-primary/20 hover:shadow-lg">
-                <CardContent className="flex aspect-square items-center justify-center p-4">
-                  <span className="text-sm md:text-base font-medium text-center">{skill}</span>
-                </CardContent>
-              </Card>
+              <div className="flex flex-col items-center justify-center gap-2 text-center">
+                <div className="text-primary transition-transform duration-300 group-hover:scale-110">
+                  {skill.icon}
+                </div>
+                <span className="text-sm font-medium text-foreground/80">{skill.name}</span>
+              </div>
             </div>
           ))}
         </div>
+        <div className="absolute top-0 left-0 w-16 h-full bg-gradient-to-r from-background to-transparent"></div>
+        <div className="absolute top-0 right-0 w-16 h-full bg-gradient-to-l from-background to-transparent"></div>
       </div>
     </div>
   );
