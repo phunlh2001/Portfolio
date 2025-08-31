@@ -1,22 +1,18 @@
 "use client";
 
-import { useRef, useLayoutEffect } from "react";
-import { gsap } from "gsap";
-import { 
-  Database, 
-  Server, 
-  Code, 
-  FileCode, 
-  GitBranch, 
-  RefreshCw, 
-  Terminal, 
-  Webhook, 
+import {
+  Database,
+  Server,
+  Code,
+  FileCode,
+  GitBranch,
+  Terminal,
+  Webhook,
   Package,
   Braces,
   GitCommit,
   Figma,
   Wind,
-  MousePointer,
   BrainCircuit,
   Palette
 } from "lucide-react";
@@ -61,77 +57,41 @@ const tools = [
   { name: "Visual Studio", icon: <Code size={48} /> },
 ];
 
-interface SkillCarouselProps {
+interface SkillGridProps {
   skills: { name: string; icon: React.ReactNode }[];
   title: string;
-  direction?: "forward" | "backward";
 }
 
-function SkillCarousel({ skills, title, direction = "forward" }: SkillCarouselProps) {
-  const carouselRef = useRef<HTMLDivElement>(null);
-
-  useLayoutEffect(() => {
-    const carousel = carouselRef.current;
-    if (!carousel) return;
-    
-    const items = Array.from(carousel.children) as HTMLDivElement[];
-    if (items.length === 0) return;
-    const totalWidth = items.reduce((acc, item) => acc + item.offsetWidth, 0) / 2;
-
-    gsap.set(carousel, { x: 0 });
-
-    const timeline = gsap.timeline({
-        repeat: -1,
-        onReverseComplete: () => timeline.totalTime(timeline.rawTime() + timeline.duration() * 10)
-    });
-    
-    timeline.to(carousel, {
-      x: direction === 'forward' ? `-=${totalWidth}` : `+=${totalWidth}`,
-      duration: 40,
-      ease: "none",
-    });
-
-    return () => {
-      timeline.kill();
-    };
-  }, [skills, direction]);
-
-
+function SkillGrid({ skills, title }: SkillGridProps) {
   return (
     <div className="mb-12">
-      <h3 className="text-2xl font-semibold mb-6 text-center">{title}</h3>
-      <div className="overflow-hidden whitespace-nowrap group relative">
-        <div ref={carouselRef} className="flex">
-          {[...skills, ...skills].map((skill, index) => (
-            <div
-              key={`${skill.name}-${index}`}
-              className="p-4 shrink-0"
-              style={{ minWidth: '150px' }}
-            >
-              <div className="flex flex-col items-center justify-center gap-2 text-center">
-                <div className="text-primary transition-transform duration-300 group-hover:scale-110">
-                  {skill.icon}
-                </div>
-                <span className="text-sm font-medium text-foreground/80">{skill.name}</span>
-              </div>
+      <h3 className="text-2xl font-semibold mb-8 text-center">{title}</h3>
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-x-6 gap-y-8 justify-items-center">
+        {skills.map((skill) => (
+          <div
+            key={skill.name}
+            className="flex flex-col items-center justify-center gap-2 text-center group"
+          >
+            <div className="text-primary transition-transform duration-300 group-hover:scale-110">
+              {skill.icon}
             </div>
-          ))}
-        </div>
-        <div className="absolute top-0 left-0 w-16 h-full bg-gradient-to-r from-background to-transparent"></div>
-        <div className="absolute top-0 right-0 w-16 h-full bg-gradient-to-l from-background to-transparent"></div>
+            <span className="text-sm font-medium text-foreground/80">{skill.name}</span>
+          </div>
+        ))}
       </div>
     </div>
   );
 }
 
+
 export function SkillsSection() {
   return (
     <section id="skills" className="w-full py-16 md:py-24 lg:py-32">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">My Skills</h2>
-        <SkillCarousel skills={mainSkills} title="Main Skills" />
-        <SkillCarousel skills={extraSkills} title="Extra Skills" direction="backward" />
-        <SkillCarousel skills={tools} title="Tools" />
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">My Skills</h2>
+        <SkillGrid skills={mainSkills} title="Main Skills" />
+        <SkillGrid skills={extraSkills} title="Extra Skills" />
+        <SkillGrid skills={tools} title="Tools" />
       </div>
     </section>
   );
