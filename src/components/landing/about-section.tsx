@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Download, Mail, MapPin } from "lucide-react";
+import { Download } from "lucide-react";
 
 export function AboutSection() {
   return (
@@ -25,20 +25,10 @@ export function AboutSection() {
             <Card>
               <CardContent className="pt-6">
                 <p className="text-lg text-foreground/80 leading-relaxed">
-                  I love coding, researching best practices, reading books, listening to audio about history & culture, writing blogs, and playing games.
+                  I love to code and research best practices related to my major so that I can optimize my code performance. I am deeply committed to ensuring the user experience and the safety of users when using our product. In addition, I also enjoy reading books and listening to audio about the history and culture of various countries. I also enjoy playing games with my friends in my free time. And write a blog to improve myself day by day.
                 </p>
               </CardContent>
             </Card>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
-                <div className="flex items-center gap-3 p-3 bg-background rounded-lg">
-                  <MapPin className="w-5 h-5 text-primary" />
-                  <span>Based in Can Tho, Vietnam</span>
-                </div>
-                <div className="flex items-center gap-3 p-3 bg-background rounded-lg">
-                  <Mail className="w-5 h-5 text-primary" />
-                  <span>phunlh2001@gmail.com</span>
-                </div>
-            </div>
             <a href="/phu_cv.pdf" download="Hung_Phu_CV.pdf">
               <Button size="lg">
                 <Download className="mr-2 h-4 w-4" />
