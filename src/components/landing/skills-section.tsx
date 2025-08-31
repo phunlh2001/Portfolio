@@ -131,8 +131,8 @@ export function SkillsSection() {
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">
           My Skills
         </h2>
-        <SkillCarousel skills={mainSkills} title="Main Skills" direction="left" />
-        <SkillCarousel skills={extraSkills} title="Extra Skills" direction="right" />
+        <SkillCarousel skills={mainSkills} title="Main" direction="left" />
+        <SkillCarousel skills={extraSkills} title="Extra" direction="right" />
       </div>
     </section>
   );

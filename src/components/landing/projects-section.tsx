@@ -14,46 +14,88 @@ import {
 
 const projects = [
   {
-    title: "Project One",
+    title: "Random Color",
     description: "A brief description of Project One. It solves a real-world problem by leveraging modern technologies.",
     image: "https://picsum.photos/400/250",
-    tags: ["Next.js", "TypeScript", "Tailwind CSS"],
-    githubUrl: "#",
+    tags: ["HTML5", "CSS3", "Javascript"],
+    liveUrl: "https://phunlh2001.github.io/Random-Color/",
+    githubUrl: "https://github.com/phunlh2001/Random-Color",
     imageHint: "tech code"
   },
   {
-    title: "Project Two",
-    description: "An innovative application that streamlines a specific workflow, built with a focus on user experience.",
-    image: "https://picsum.photos/400/251",
-    tags: ["React", "Node.js", "MongoDB"],
-    liveUrl: "#",
-    githubUrl: "#",
-    imageHint: "laptop desk"
-  },
-  {
-    title: "Project Three",
-    description: "A server-side rendered application that provides fast and reliable data fetching and display.",
-    image: "https://picsum.photos/400/252",
-    tags: ["Next.js", "GraphQL", "PostgreSQL"],
-    githubUrl: "#",
-    imageHint: "data dashboard"
-  },
-  {
-    title: "Project Four",
+    title: "GuideNow",
     description: "A mobile-first application designed to provide a seamless user experience on any device.",
     image: "https://picsum.photos/400/253",
-    tags: ["React Native", "Firebase", "Redux"],
-    liveUrl: "#",
-    githubUrl: "#",
+    tags: ["React Native", "Firebase", "Redux", "Expo Go"],
+    githubUrl: "https://github.com/phunlh2001/GuideNow",
     imageHint: "mobile app"
   },
   {
-    title: "Project Five",
+    title: "PlantMed",
     description: "A data visualization dashboard that provides insights into complex datasets.",
     image: "https://picsum.photos/400/254",
-    tags: ["D3.js", "React", "Python"],
-    liveUrl: "#",
-    githubUrl: "#",
+    tags: ["ReactJS", "React-Native", ".NET 5", "Redux", "Redux-Toolkit", "MUI5", "Python", "FastAPI", "YOLO8", "AI", "SQL Server", "Firebase"],
+    liveUrl: "https://plantmed.netlify.app/",
+    githubUrl: "https://github.com/PlantMed-Capstone-Project",
+    imageHint: "analytics chart"
+  },
+  {
+    title: "Law-N-GenZ",
+    description: "A data visualization dashboard that provides insights into complex datasets.",
+    image: "https://picsum.photos/400/254",
+    tags: ["Next", "Typescript", "Tailwind"],
+    githubUrl: "https://github.com/phunlh2001/Law-N-Genz",
+    imageHint: "analytics chart"
+  },
+  {
+    title: "Baverage",
+    description: "A data visualization dashboard that provides insights into complex datasets.",
+    image: "https://picsum.photos/400/254",
+    tags: ["Java", "SQLite", "Room Android"],
+    githubUrl: "https://github.com/phunlh2001/PRM392-Beverages",
+    imageHint: "analytics chart"
+  },
+  {
+    title: "Extract zip file",
+    description: "A data visualization dashboard that provides insights into complex datasets.",
+    image: "https://picsum.photos/400/254",
+    tags: ["Rust", "Tools"],
+    githubUrl: "https://github.com/phunlh2001/Extract-Zip-File",
+    imageHint: "analytics chart"
+  },
+  {
+    title: "Generate QR Code",
+    description: "A data visualization dashboard that provides insights into complex datasets.",
+    image: "https://picsum.photos/400/254",
+    tags: ["HTML5", "CSS3", "Javascript"],
+    liveUrl: "https://phunlh2001.github.io/Generate-QR-Code/",
+    githubUrl: "https://github.com/phunlh2001/Generate-QR-Code",
+    imageHint: "analytics chart"
+  },
+  {
+    title: "Random Quotes",
+    description: "A data visualization dashboard that provides insights into complex datasets.",
+    image: "https://picsum.photos/400/254",
+    tags: ["HTML5", "CSS3", "Typescript"],
+    githubUrl: "https://github.com/phunlh2001/Random-Quotes",
+    imageHint: "analytics chart"
+  },
+  {
+    title: "Color Theme Picker",
+    description: "A data visualization dashboard that provides insights into complex datasets.",
+    image: "https://picsum.photos/400/254",
+    tags: ["HTML5", "CSS3", "Javascript"],
+    liveUrl: "https://phunlh2001.github.io/Color-Theme-Picker/",
+    githubUrl: "https://github.com/phunlh2001/Color-Theme-Picker",
+    imageHint: "analytics chart"
+  },
+  {
+    title: "Rock-Paper-Scissors",
+    description: "A data visualization dashboard that provides insights into complex datasets.",
+    image: "https://picsum.photos/400/254",
+    tags: ["HTML5", "CSS3", "Javascript"],
+    liveUrl: "https://phunlh2001.github.io/Rock-Paper-Scissors/",
+    githubUrl: "https://github.com/phunlh2001/Rock-Paper-Scissors",
     imageHint: "analytics chart"
   },
 ];
@@ -98,23 +140,15 @@ export function ProjectsSection() {
                       </div>
                     </CardContent>
                     <CardFooter className="gap-2 mt-auto">
-                      {project.liveUrl ? (
-                        <>
-                          <Button asChild variant="outline" className="w-full">
-                            <Link href={project.githubUrl} target="_blank">
-                              <Github /> Source Code
-                            </Link>
-                          </Button>
-                          <Button asChild className="w-full">
-                            <Link href={project.liveUrl} target="_blank">
-                              <ExternalLink /> Live Demo
-                            </Link>
-                          </Button>
-                        </>
-                      ) : (
-                        <Button asChild variant="outline" className="w-full">
-                          <Link href={project.githubUrl} target="_blank">
-                            <Github /> Source Code
+                      <Button asChild variant="outline" className="w-full">
+                        <Link href={project.githubUrl} target="_blank">
+                          <Github /> Source Code
+                        </Link>
+                      </Button>
+                      {project.liveUrl && (
+                        <Button asChild className="w-full">
+                          <Link href={project.liveUrl} target="_blank">
+                            <ExternalLink /> Live Demo
                           </Link>
                         </Button>
                       )}
