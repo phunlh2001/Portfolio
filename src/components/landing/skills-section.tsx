@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect, useRef } from "react";
+import { gsap } from "gsap";
 import {
   Database,
   Server,
@@ -14,7 +16,7 @@ import {
   Figma,
   Wind,
   BrainCircuit,
-  Palette
+  Palette,
 } from "lucide-react";
 
 const mainSkills = [
@@ -47,51 +49,90 @@ const extraSkills = [
   { name: "Figma", icon: <Figma size={48} /> },
 ];
 
-const tools = [
-  { name: "Bash", icon: <Terminal size={48} /> },
-  { name: "VS Code", icon: <Code size={48} /> },
-  { name: "Vim", icon: <Terminal size={48} /> },
-  { name: "NeoVim", icon: <Terminal size={48} /> },
-  { name: "Sublime Text", icon: <FileCode size={48} /> },
-  { name: "Jetbrains", icon: <Code size={48} /> },
-  { name: "Visual Studio", icon: <Code size={48} /> },
-];
-
-interface SkillGridProps {
+interface SkillCarouselProps {
   skills: { name: string; icon: React.ReactNode }[];
   title: string;
+  direction?: "left" | "right";
 }
 
-function SkillGrid({ skills, title }: SkillGridProps) {
+function SkillCarousel({
+  skills,
+  title,
+  direction = "left",
+}: SkillCarouselProps) {
+  const marqueeRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (marqueeRef.current) {
+      const marquee = marqueeRef.current;
+      const content = marquee.querySelector(".marquee-content") as HTMLDivElement;
+      
+      if (content) {
+        const contentWidth = content.offsetWidth;
+        const items = Array.from(content.children);
+        
+        // Clone items to create a seamless loop
+        items.forEach(item => {
+          content.appendChild(item.cloneNode(true));
+        });
+
+        const tl = gsap.timeline({ repeat: -1, ease: "linear" });
+
+        if (direction === "left") {
+          tl.fromTo(
+            content,
+            { x: 0 },
+            { x: -contentWidth, duration: 30 }
+          );
+        } else {
+          tl.fromTo(
+            content,
+            { x: -contentWidth },
+            { x: 0, duration: 30 }
+          );
+        }
+
+        return () => {
+          tl.kill();
+        };
+      }
+    }
+  }, [direction]);
+
   return (
     <div className="mb-12">
       <h3 className="text-2xl font-semibold mb-8 text-center">{title}</h3>
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-x-6 gap-y-8 justify-items-center">
-        {skills.map((skill) => (
-          <div
-            key={skill.name}
-            className="flex flex-col items-center justify-center gap-2 text-center group"
-          >
-            <div className="text-primary transition-transform duration-300 group-hover:scale-110">
-              {skill.icon}
+      <div
+        ref={marqueeRef}
+        className="marquee relative w-full overflow-hidden"
+      >
+        <div className="marquee-content flex">
+          {skills.map((skill) => (
+            <div
+              key={skill.name}
+              className="flex flex-col items-center justify-center gap-2 text-center mx-8 flex-shrink-0"
+            >
+              <div className="text-primary">{skill.icon}</div>
+              <span className="text-sm font-medium text-foreground/80">
+                {skill.name}
+              </span>
             </div>
-            <span className="text-sm font-medium text-foreground/80">{skill.name}</span>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );
 }
 
-
 export function SkillsSection() {
   return (
     <section id="skills" className="w-full py-16 md:py-24 lg:py-32">
-      <div className="container mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">My Skills</h2>
-        <SkillGrid skills={mainSkills} title="Main Skills" />
-        <SkillGrid skills={extraSkills} title="Extra Skills" />
-        <SkillGrid skills={tools} title="Tools" />
+      <div className="container mx-auto px-4 overflow-hidden">
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">
+          My Skills
+        </h2>
+        <SkillCarousel skills={mainSkills} title="Main Skills" direction="left" />
+        <SkillCarousel skills={extraSkills} title="Extra Skills" direction="right" />
       </div>
     </section>
   );
