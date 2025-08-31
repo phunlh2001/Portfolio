@@ -16,36 +16,32 @@ interface SkillCarouselProps {
 
 function SkillCarousel({ skills, title, direction = "forward" }: SkillCarouselProps) {
   const carouselRef = useRef<HTMLDivElement>(null);
-  const itemsRef = useRef<HTMLDivElement[]>([]);
 
   useLayoutEffect(() => {
     const carousel = carouselRef.current;
     if (!carousel) return;
     
-    const items = itemsRef.current;
-    const totalWidth = items.reduce((acc, item) => acc + item.offsetWidth, 0) / 2; // Divide by 2 because we doubled the items
+    const items = Array.from(carousel.children) as HTMLDivElement[];
+    const totalWidth = items.reduce((acc, item) => acc + item.offsetWidth, 0) / 2;
 
-    let ctx = gsap.context(() => {
-      gsap.set(carousel, { x: 0 });
+    gsap.set(carousel, { x: 0 });
 
-      const animate = () => {
-        gsap.to(carousel, {
-          x: direction === 'forward' ? `-=${totalWidth}` : `+=${totalWidth}`,
-          duration: 30, // Adjust duration for speed
-          ease: "none",
-          onComplete: () => {
-            // Reset position to create seamless loop
-            gsap.set(carousel, { x: 0 });
-            animate();
-          }
-        });
-      };
-      
-      animate();
+    const mod = gsap.utils.wrap(0, -totalWidth);
 
-    }, carouselRef);
+    const timeline = gsap.timeline({
+        repeat: -1,
+        onReverseComplete: () => timeline.totalTime(timeline.rawTime() + timeline.duration() * 10)
+    });
+    
+    timeline.to(carousel, {
+      x: direction === 'forward' ? `-=${totalWidth}` : `+=${totalWidth}`,
+      duration: 30,
+      ease: "none",
+    });
 
-    return () => ctx.revert();
+    return () => {
+      timeline.kill();
+    };
   }, [skills, direction]);
 
 
@@ -57,7 +53,6 @@ function SkillCarousel({ skills, title, direction = "forward" }: SkillCarouselPr
           {[...skills, ...skills].map((skill, index) => (
             <div
               key={index}
-              ref={(el) => (itemsRef.current[index] = el!)}
               className="p-2 shrink-0"
               style={{ minWidth: '150px' }}
             >
