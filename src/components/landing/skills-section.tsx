@@ -1,10 +1,8 @@
 "use client";
 
-import { type CarouselApi } from "@/components/ui/carousel";
-import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
+import { useRef, useLayoutEffect } from "react";
+import { gsap } from "gsap";
 import { Card, CardContent } from "@/components/ui/card";
-import { useEffect, useState } from "react";
-import Autoplay from "embla-carousel-autoplay";
 
 const mainSkills = ["NodeJS", "JavaScript", "TypeScript", "SQL", "MongoDB", "React", "Next.js", "HTML5", "CSS3"];
 const extraSkills = ["Python", "Java", "C++", "Docker", "Git", "CI/CD", "Linux", "REST API", "GraphQL"];
@@ -17,32 +15,61 @@ interface SkillCarouselProps {
 }
 
 function SkillCarousel({ skills, title, direction = "forward" }: SkillCarouselProps) {
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const itemsRef = useRef<HTMLDivElement[]>([]);
+
+  useLayoutEffect(() => {
+    const carousel = carouselRef.current;
+    if (!carousel) return;
+    
+    const items = itemsRef.current;
+    const totalWidth = items.reduce((acc, item) => acc + item.offsetWidth, 0) / 2; // Divide by 2 because we doubled the items
+
+    let ctx = gsap.context(() => {
+      gsap.set(carousel, { x: 0 });
+
+      const animate = () => {
+        gsap.to(carousel, {
+          x: direction === 'forward' ? `-=${totalWidth}` : `+=${totalWidth}`,
+          duration: 30, // Adjust duration for speed
+          ease: "none",
+          onComplete: () => {
+            // Reset position to create seamless loop
+            gsap.set(carousel, { x: 0 });
+            animate();
+          }
+        });
+      };
+      
+      animate();
+
+    }, carouselRef);
+
+    return () => ctx.revert();
+  }, [skills, direction]);
+
+
   return (
     <div className="mb-12">
       <h3 className="text-2xl font-semibold mb-4 text-center">{title}</h3>
-      <Carousel 
-        plugins={[
-            Autoplay({
-                delay: 2000,
-                stopOnInteraction: false,
-                direction: direction === "forward" ? "forward" : "backward",
-            })
-        ]}
-        opts={{ align: "start", loop: true }}>
-        <CarouselContent>
-          {skills.map((skill, index) => (
-            <CarouselItem key={index} className="basis-1/3 md:basis-1/4 lg:basis-1/6">
-              <div className="p-1">
-                <Card className="transition-transform duration-300 hover:scale-105 hover:shadow-primary/20 hover:shadow-lg">
-                  <CardContent className="flex aspect-square items-center justify-center p-4">
-                    <span className="text-sm md:text-base font-medium text-center">{skill}</span>
-                  </CardContent>
-                </Card>
-              </div>
-            </CarouselItem>
+      <div className="overflow-hidden whitespace-nowrap">
+        <div ref={carouselRef} className="flex">
+          {[...skills, ...skills].map((skill, index) => (
+            <div
+              key={index}
+              ref={(el) => (itemsRef.current[index] = el!)}
+              className="p-2 shrink-0"
+              style={{ minWidth: '150px' }}
+            >
+              <Card className="transition-transform duration-300 hover:scale-105 hover:shadow-primary/20 hover:shadow-lg">
+                <CardContent className="flex aspect-square items-center justify-center p-4">
+                  <span className="text-sm md:text-base font-medium text-center">{skill}</span>
+                </CardContent>
+              </Card>
+            </div>
           ))}
-        </CarouselContent>
-      </Carousel>
+        </div>
+      </div>
     </div>
   );
 }
