@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import { ThemeProvider } from '@/components/theme-provider';
 import { Toaster } from '@/components/ui/toaster';
+import { ScrollToTopButton } from '@/components/scroll-to-top';
 
 export const metadata: Metadata = {
   title: "Phu's Portfolio",
@@ -34,6 +35,7 @@ export default function RootLayout({
         >
           {children}
           <Toaster />
+          <ScrollToTopButton />
         </ThemeProvider>
       </body>
     </html>

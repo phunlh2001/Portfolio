@@ -69,4 +69,28 @@
   body {
     @apply bg-background text-foreground;
   }
+  /* Custom Scrollbar Styles */
+  ::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--secondary));
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--primary));
+    border-radius: 6px;
+    border: 3px solid hsl(var(--secondary));
+  }
+  
+  .dark ::-webkit-scrollbar-track {
+    background: hsl(var(--background));
+  }
+
+  .dark ::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--primary));
+    border-color: hsl(var(--background));
+  }
 }
