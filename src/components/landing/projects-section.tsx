@@ -18,7 +18,6 @@ const projects = [
     description: "A brief description of Project One. It solves a real-world problem by leveraging modern technologies.",
     image: "https://picsum.photos/400/250",
     tags: ["Next.js", "TypeScript", "Tailwind CSS"],
-    liveUrl: "#",
     githubUrl: "#",
     imageHint: "tech code"
   },
@@ -36,7 +35,6 @@ const projects = [
     description: "A server-side rendered application that provides fast and reliable data fetching and display.",
     image: "https://picsum.photos/400/252",
     tags: ["Next.js", "GraphQL", "PostgreSQL"],
-    liveUrl: "#",
     githubUrl: "#",
     imageHint: "data dashboard"
   },
@@ -100,16 +98,26 @@ export function ProjectsSection() {
                       </div>
                     </CardContent>
                     <CardFooter className="gap-2 mt-auto">
-                      <Button asChild variant="outline" className="w-full">
-                        <Link href={project.githubUrl} target="_blank">
-                          <Github /> Source Code
-                        </Link>
-                      </Button>
-                      <Button asChild className="w-full">
-                        <Link href={project.liveUrl} target="_blank">
-                          <ExternalLink /> Live Demo
-                        </Link>
-                      </Button>
+                      {project.liveUrl ? (
+                        <>
+                          <Button asChild variant="outline" className="w-full">
+                            <Link href={project.githubUrl} target="_blank">
+                              <Github /> Source Code
+                            </Link>
+                          </Button>
+                          <Button asChild className="w-full">
+                            <Link href={project.liveUrl} target="_blank">
+                              <ExternalLink /> Live Demo
+                            </Link>
+                          </Button>
+                        </>
+                      ) : (
+                        <Button asChild variant="outline" className="w-full">
+                          <Link href={project.githubUrl} target="_blank">
+                            <Github /> Source Code
+                          </Link>
+                        </Button>
+                      )}
                     </CardFooter>
                   </Card>
                 </div>
