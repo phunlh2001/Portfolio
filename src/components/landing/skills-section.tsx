@@ -14,41 +14,51 @@ import {
   Package,
   Braces,
   GitCommit,
-  Bot,
   Figma,
-  CheckSquare
+  Wind,
+  MousePointer,
+  BrainCircuit,
+  Palette
 } from "lucide-react";
 
 const mainSkills = [
-  { name: "NodeJS", icon: <Server size={48} /> },
+  { name: "C#", icon: <Code size={48} /> },
+  { name: ".NET", icon: <Code size={48} /> },
+  { name: "Java", icon: <FileCode size={48} /> },
   { name: "JavaScript", icon: <FileCode size={48} /> },
   { name: "TypeScript", icon: <Braces size={48} /> },
-  { name: "SQL", icon: <Database size={48} /> },
+  { name: "NodeJS", icon: <Server size={48} /> },
+  { name: "Express.JS", icon: <Webhook size={48} /> },
+  { name: "NestJS", icon: <BrainCircuit size={48} /> },
   { name: "MongoDB", icon: <Database size={48} /> },
+  { name: "MS SQL Server", icon: <Database size={48} /> },
+  { name: "PostgreSQL", icon: <Database size={48} /> },
+];
+
+const extraSkills = [
   { name: "React", icon: <Code size={48} /> },
-  { name: "Next.js", icon: <Code size={48} /> },
+  { name: "MUI5", icon: <Palette size={48} /> },
+  { name: "Redux", icon: <GitCommit size={48} /> },
+  { name: "Redux-Toolkit", icon: <GitCommit size={48} /> },
+  { name: "Prisma", icon: <Database size={48} /> },
   { name: "HTML5", icon: <FileCode size={48} /> },
   { name: "CSS3", icon: <FileCode size={48} /> },
-];
-const extraSkills = [
-  { name: "Python", icon: <FileCode size={48} /> },
-  { name: "Java", icon: <FileCode size={48} /> },
-  { name: "C++", icon: <FileCode size={48} /> },
-  { name: "Docker", icon: <Package size={48} /> },
+  { name: "Sass", icon: <FileCode size={48} /> },
+  { name: "Tailwind", icon: <Wind size={48} /> },
+  { name: "Bootstrap", icon: <Package size={48} /> },
+  { name: "jQuery", icon: <FileCode size={48} /> },
   { name: "Git", icon: <GitBranch size={48} /> },
-  { name: "CI/CD", icon: <RefreshCw size={48} /> },
-  { name: "Linux", icon: <Terminal size={48} /> },
-  { name: "REST API", icon: <Webhook size={48} /> },
-  { name: "GraphQL", icon: <GitCommit size={48} /> },
-];
-const tools = [
-  { name: "VS Code", icon: <Code size={48} /> },
-  { name: "Postman", icon: <Webhook size={48} /> },
-  { name: "Jira", icon: <CheckSquare size={48} /> },
   { name: "Figma", icon: <Figma size={48} /> },
-  { name: "Notion", icon: <CheckSquare size={48} /> },
-  { name: "GitHub", icon: <GitBranch size={48} /> },
-  { name: "GitLab", icon: <GitBranch size={48} /> },
+];
+
+const tools = [
+  { name: "Bash", icon: <Terminal size={48} /> },
+  { name: "VS Code", icon: <Code size={48} /> },
+  { name: "Vim", icon: <Terminal size={48} /> },
+  { name: "NeoVim", icon: <Terminal size={48} /> },
+  { name: "Sublime Text", icon: <FileCode size={48} /> },
+  { name: "Jetbrains", icon: <Code size={48} /> },
+  { name: "Visual Studio", icon: <Code size={48} /> },
 ];
 
 interface SkillCarouselProps {
@@ -96,7 +106,7 @@ function SkillCarousel({ skills, title, direction = "forward" }: SkillCarouselPr
             <div
               key={`${skill.name}-${index}`}
               className="p-4 shrink-0"
-              style={{ minWidth: '120px' }}
+              style={{ minWidth: '150px' }}
             >
               <div className="flex flex-col items-center justify-center gap-2 text-center">
                 <div className="text-primary transition-transform duration-300 group-hover:scale-110">
