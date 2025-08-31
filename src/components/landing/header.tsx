@@ -22,7 +22,7 @@ export function Header() {
       <div className="container flex h-14 max-w-screen-2xl items-center">
         <Link href="#home" className="mr-6 flex items-center space-x-2">
           <Code2 className="h-6 w-6 text-primary" />
-          <span className="font-bold">Phu's Portfolio</span>
+          <span className="sr-only font-bold">Phu's Portfolio</span>
         </Link>
         <nav className="hidden flex-1 items-center space-x-6 text-sm font-medium md:flex">
           {navLinks.map((link) => (

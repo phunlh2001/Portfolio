@@ -39,14 +39,12 @@ export function AboutSection() {
                   <span>phunlh2001@gmail.com</span>
                 </div>
             </div>
-             <p className="text-foreground/80 italic">Currently learning Cyber Security to broaden my horizons.</p>
             <a href="/phu_cv.pdf" download="Hung_Phu_CV.pdf">
               <Button size="lg">
                 <Download className="mr-2 h-4 w-4" />
                 Download CV
               </Button>
             </a>
-            <p className="text-xs text-muted-foreground">Note: Please add your CV as `phu_cv.pdf` to the `public` folder.</p>
           </div>
         </div>
       </div>
