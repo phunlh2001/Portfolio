@@ -15,7 +15,7 @@ export function AboutSection() {
             <Card className="bg-secondary border-none shadow-none">
               <CardContent className="pt-6">
                 <p className="text-lg text-foreground/80 leading-relaxed">
-                  I love to code and research best practices related to my major so that I can optimize my code performance. I am deeply committed to ensuring the user experience and the safety of users when using our product. In addition, I also enjoy reading books and listening to audio about the history and culture of various countries. I also enjoy playing games with my friends in my free time. And write a blog to improve myself day by day.
+                  I love coding and constantly explore best practices in my field to make my code more efficient and reliable. What excites me the most is building products that not only perform well but also bring a safe and enjoyable experience to users. Outside of work, I often find myself immersed in books or audio about history and culture, which broadens my perspective of the world. I also enjoy relaxing with friends through gaming, and I write blogs as a way to reflect and improve myself day by day.
                 </p>
               </CardContent>
             </Card>
