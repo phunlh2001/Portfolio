@@ -1,12 +1,12 @@
 "use client";
 
+import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { useTransition } from "react";
+import emailjs from "@emailjs/browser";
 import { useToast } from "@/hooks/use-toast";
 
-import { handleContactSubmission } from "@/app/actions";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -24,7 +24,8 @@ type ContactFormValues = z.infer<typeof contactSchema>;
 
 export function ContactSection() {
   const { toast } = useToast();
-  const [isPending, startTransition] = useTransition();
+  const [isSending, setIsSending] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
 
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(contactSchema),
@@ -35,23 +36,38 @@ export function ContactSection() {
     },
   });
 
-  const onSubmit = (values: ContactFormValues) => {
-    startTransition(async () => {
-      const result = await handleContactSubmission(values);
-      if (result.error) {
-        toast({
-          title: "Error",
-          description: result.error,
-          variant: "destructive",
-        });
-      } else {
-        toast({
-          title: "Message Sent!",
-          description: "Thank you for reaching out. I'll get back to you soon.",
-        });
-        form.reset();
-      }
-    });
+  const onSubmit = () => {
+    if (!formRef.current) return;
+
+    setIsSending(true);
+
+    emailjs
+      .sendForm(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || "", // Replace with your EmailJS Service ID
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || "", // Replace with your EmailJS Template ID
+        formRef.current,
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || "" // Replace with your EmailJS Public Key
+      )
+      .then(
+        () => {
+          toast({
+            title: "Message Sent!",
+            description: "Thank you for reaching out. I'll get back to you soon.",
+          });
+          form.reset();
+        },
+        (error) => {
+          toast({
+            title: "Error",
+            description: "Failed to send message. Please try again later.",
+            variant: "destructive",
+          });
+          console.error("EmailJS Error:", error.text);
+        }
+      )
+      .finally(() => {
+        setIsSending(false);
+      });
   };
 
   return (
@@ -63,7 +79,7 @@ export function ContactSection() {
           </CardHeader>
           <CardContent>
             <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+              <form ref={formRef} onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                 <FormField
                   control={form.control}
                   name="name"
@@ -95,7 +111,7 @@ export function ContactSection() {
                   name="content"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Content</FormLabel>
+                      <FormLabel>Message</FormLabel>
                       <FormControl>
                         <Textarea placeholder="Your message..." rows={5} {...field} />
                       </FormControl>
@@ -103,8 +119,8 @@ export function ContactSection() {
                     </FormItem>
                   )}
                 />
-                <Button type="submit" className="w-full" disabled={isPending}>
-                  {isPending ? "Sending..." : "Send Message"}
+                <Button type="submit" className="w-full" disabled={isSending}>
+                  {isSending ? "Sending..." : "Send Message"}
                   <Send className="ml-2 h-4 w-4" />
                 </Button>
               </form>
