@@ -13,6 +13,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Send } from "lucide-react";
+import { PUBLIC_KEY, SERVICE_ID, TEMPLATE_ID } from "@/lib/env";
 
 const contactSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters."),
@@ -43,10 +44,10 @@ export function ContactSection() {
 
     emailjs
       .sendForm(
-        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || "", // Replace with your EmailJS Service ID
-        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || "", // Replace with your EmailJS Template ID
+        SERVICE_ID,
+        TEMPLATE_ID,
         formRef.current,
-        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || "" // Replace with your EmailJS Public Key
+        PUBLIC_KEY
       )
       .then(
         () => {
