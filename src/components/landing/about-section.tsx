@@ -19,7 +19,7 @@ export function AboutSection() {
                 </p>
               </CardContent>
             </Card>
-            <a href="/HungPhu_CV.pdf" download="/HungPhu_CV.pdf">
+            <a href="/cv/HungPhu_CV.pdf" download="HungPhu_CV.pdf">
               <Button size="lg" className="mt-4">
                 <Download className="mr-2 h-4 w-4" />
                 Download CV
@@ -30,7 +30,7 @@ export function AboutSection() {
             <div className="relative w-[280px] h-[320px] md:w-[350px] md:h-[400px] group">
               <div className="absolute -inset-1.5 bg-gradient-to-r from-primary to-accent rounded-lg blur-lg opacity-50 group-hover:opacity-75 transition duration-500"></div>
               <Image
-                src="/avatar.jpg"
+                src="/images/avatar.jpg"
                 alt="Hung Phu"
                 width={350}
                 height={400}

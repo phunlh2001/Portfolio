@@ -15,88 +15,64 @@ import {
 const projects = [
   {
     title: "Random Color",
-    description: "A brief description of Project One. It solves a real-world problem by leveraging modern technologies.",
-    image: "https://picsum.photos/400/250",
+    description: "A simple tool that generates random colors to help users quickly find suitable color codes for backgrounds or design ideas.",
+    image: "/images/projects/random-color.png",
     tags: ["HTML5", "CSS3", "Javascript"],
     liveUrl: "https://phunlh2001.github.io/Random-Color/",
-    githubUrl: "https://github.com/phunlh2001/Random-Color",
-    imageHint: "tech code"
+    githubUrl: "https://github.com/phunlh2001/Random-Color"
   },
   {
     title: "GuideNow",
-    description: "A mobile-first application designed to provide a seamless user experience on any device.",
-    image: "https://picsum.photos/400/253",
+    description: "A mobile app created with a startup mindset, designed to connect users with local food, drinks, and travel experiences for a more authentic journey.",
+    image: "/images/projects/guidenow.png",
     tags: ["React Native", "Firebase", "Redux", "Expo Go"],
-    githubUrl: "https://github.com/phunlh2001/GuideNow",
-    imageHint: "mobile app"
+    githubUrl: "https://github.com/phunlh2001/GuideNow"
   },
   {
     title: "PlantMed",
-    description: "A data visualization dashboard that provides insights into complex datasets.",
-    image: "https://picsum.photos/400/254",
+    description: "A capstone project that leverages AI and custom-trained models to identify medicinal plants through photos, providing insights into their benefits and potential side effects.",
+    image: "/images/projects/plantmed.png",
     tags: ["ReactJS", "React-Native", ".NET 5", "Redux", "Redux-Toolkit", "MUI5", "Python", "FastAPI", "YOLO8", "AI", "SQL Server", "Firebase"],
     liveUrl: "https://plantmed.netlify.app/",
-    githubUrl: "https://github.com/PlantMed-Capstone-Project",
-    imageHint: "analytics chart"
-  },
-  {
-    title: "Law-N-GenZ",
-    description: "A data visualization dashboard that provides insights into complex datasets.",
-    image: "https://picsum.photos/400/254",
-    tags: ["Next", "Typescript", "Tailwind"],
-    githubUrl: "https://github.com/phunlh2001/Law-N-Genz",
-    imageHint: "analytics chart"
+    githubUrl: "https://github.com/PlantMed-Capstone-Project"
   },
   {
     title: "Baverage",
-    description: "A data visualization dashboard that provides insights into complex datasets.",
-    image: "https://picsum.photos/400/254",
+    description: "A Java-based mobile app built to support take-away beverage orders, offering a simple and convenient way for users to purchase drinks.",
+    image: "/images/projects/baverage.png",
     tags: ["Java", "SQLite", "Room Android"],
-    githubUrl: "https://github.com/phunlh2001/PRM392-Beverages",
-    imageHint: "analytics chart"
-  },
-  {
-    title: "Extract zip file",
-    description: "A data visualization dashboard that provides insights into complex datasets.",
-    image: "https://picsum.photos/400/254",
-    tags: ["Rust", "Tools"],
-    githubUrl: "https://github.com/phunlh2001/Extract-Zip-File",
-    imageHint: "analytics chart"
+    githubUrl: "https://github.com/phunlh2001/PRM392-Beverages"
   },
   {
     title: "Generate QR Code",
-    description: "A data visualization dashboard that provides insights into complex datasets.",
-    image: "https://picsum.photos/400/254",
+    description: "A lightweight project that transforms any input into a QR code, making it easy to share links, text, or information instantly.",
+    image: "/images/projects/generate-qr.png",
     tags: ["HTML5", "CSS3", "Javascript"],
     liveUrl: "https://phunlh2001.github.io/Generate-QR-Code/",
-    githubUrl: "https://github.com/phunlh2001/Generate-QR-Code",
-    imageHint: "analytics chart"
+    githubUrl: "https://github.com/phunlh2001/Generate-QR-Code"
   },
   {
-    title: "Random Quotes",
-    description: "A data visualization dashboard that provides insights into complex datasets.",
-    image: "https://picsum.photos/400/254",
-    tags: ["HTML5", "CSS3", "Typescript"],
-    githubUrl: "https://github.com/phunlh2001/Random-Quotes",
-    imageHint: "analytics chart"
+    title: "Extract zip file",
+    description: "A first Rust learning project that focuses on building a tool to extract compressed files, marking the starting point of my journey with the language.",
+    image: "/images/projects/extract-zip.png",
+    tags: ["Rust", "Tools"],
+    githubUrl: "https://github.com/phunlh2001/Extract-Zip-File"
   },
   {
     title: "Color Theme Picker",
-    description: "A data visualization dashboard that provides insights into complex datasets.",
-    image: "https://picsum.photos/400/254",
+    description: "A creative experiment that generates random color themes, helping users explore text and background combinations effortlessly.",
+    image: "/images/projects/theme-picker.png",
     tags: ["HTML5", "CSS3", "Javascript"],
     liveUrl: "https://phunlh2001.github.io/Color-Theme-Picker/",
-    githubUrl: "https://github.com/phunlh2001/Color-Theme-Picker",
-    imageHint: "analytics chart"
+    githubUrl: "https://github.com/phunlh2001/Color-Theme-Picker"
   },
   {
     title: "Rock-Paper-Scissors",
-    description: "A data visualization dashboard that provides insights into complex datasets.",
-    image: "https://picsum.photos/400/254",
+    description: "A fun web game designed for entertainment, bringing the classic rock-paper-scissors experience to browsers with a simple and interactive interface.",
+    image: "/images/projects/rock-paper-scissors.png",
     tags: ["HTML5", "CSS3", "Javascript"],
     liveUrl: "https://phunlh2001.github.io/Rock-Paper-Scissors/",
-    githubUrl: "https://github.com/phunlh2001/Rock-Paper-Scissors",
-    imageHint: "analytics chart"
+    githubUrl: "https://github.com/phunlh2001/Rock-Paper-Scissors"
   },
 ];
 
@@ -126,7 +102,6 @@ export function ProjectsSection() {
                           alt={project.title}
                           fill
                           className="object-cover"
-                          data-ai-hint={project.imageHint}
                         />
                       </div>
                     </CardHeader>
