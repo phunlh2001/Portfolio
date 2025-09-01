@@ -32,10 +32,16 @@ export function HomeSection() {
         ease: "none"
       }).to(textRef.current, { // Pause at the end of the sentence
         duration: 1.5
-      }).to(textRef.current, { // "Delete" the text by animating back to empty
+      }).to({ length: text.length }, {
         duration: text.length / 20,
-        text: "",
-        ease: "none"
+        length: 0,
+        ease: "none",
+        onUpdate: function () {
+          const currentLength = Math.floor(this.targets()[0].length);
+          if (textRef.current) {
+            textRef.current.textContent = text.substring(0, currentLength);
+          }  
+        }
       });
     });
 
