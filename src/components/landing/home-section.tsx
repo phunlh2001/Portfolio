@@ -32,9 +32,12 @@ export function HomeSection() {
         ease: "none"
       }).to(textRef.current, { // Pause at the end of the sentence
         duration: 1.5
-      }).to(textRef.current, { // "Delete" the text
+      }).to(textRef.current, { // "Delete" the text with a backspace effect
         duration: text.length / 20,
-        text: "",
+        text: {
+          value: "",
+          delimiter: ""
+        },
         ease: "none"
       });
     });
