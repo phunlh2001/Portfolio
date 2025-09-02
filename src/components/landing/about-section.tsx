@@ -1,6 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { Download } from "lucide-react";
+import { Download, Mail, Phone, MapPin, GraduationCap, Home } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 
 export function AboutSection() {
@@ -27,16 +29,47 @@ export function AboutSection() {
             </a>
           </div>
           <div className="md:col-span-2 flex justify-center md:justify-end">
-            <div className="relative w-[280px] h-[320px] md:w-[350px] md:h-[400px] group">
+            <div className="relative w-[280px] h-[320px] md:w-[350px] md:h-[400px] group [perspective:1000px]">
               <div className="absolute -inset-1.5 bg-gradient-to-r from-primary to-accent rounded-lg blur-lg opacity-50 group-hover:opacity-75 transition duration-500"></div>
-              <Image
-                src="/images/avatar.jpg"
-                alt="Hung Phu"
-                width={350}
-                height={400}
-                className="relative rounded-lg object-cover w-full h-full shadow-lg"
-                data-ai-hint="profile picture"
-              />
+              <div className="relative w-full h-full rounded-lg shadow-lg transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+                {/* Front Side */}
+                <div className="absolute w-full h-full [backface-visibility:hidden]">
+                  <Image
+                    src="/images/avatar.jpg"
+                    alt="Hung Phu"
+                    width={350}
+                    height={400}
+                    className="relative rounded-lg object-cover w-full h-full"
+                    data-ai-hint="profile picture"
+                  />
+                </div>
+                {/* Back Side */}
+                <div className="absolute w-full h-full bg-card rounded-lg [backface-visibility:hidden] [transform:rotateY(180deg)] p-6 flex flex-col justify-center">
+                   <h3 className="text-2xl font-bold mb-4 text-center">My Info</h3>
+                   <ul className="space-y-3 text-sm md:text-base">
+                      <li className="flex items-center gap-3">
+                        <Phone className="h-4 w-4 text-primary"/>
+                        <span>0396384095</span>
+                      </li>
+                      <li className="flex items-center gap-3">
+                        <Mail className="h-4 w-4 text-primary"/>
+                        <span>phunlh2001@gmail.com</span>
+                      </li>
+                      <li className="flex items-center gap-3">
+                        <GraduationCap className="h-4 w-4 text-primary"/>
+                        <span>7.9 (FPT University)</span>
+                      </li>
+                      <li className="flex items-center gap-3">
+                        <Home className="h-4 w-4 text-primary"/>
+                        <span>From: Dong Thap</span>
+                      </li>
+                       <li className="flex items-center gap-3">
+                        <MapPin className="h-4 w-4 text-primary"/>
+                        <span>Based in: Can Tho</span>
+                      </li>
+                   </ul>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -44,3 +77,5 @@ export function AboutSection() {
     </section>
   );
 }
+
+    
