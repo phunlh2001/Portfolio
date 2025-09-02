@@ -2,33 +2,29 @@
 import Image from "next/image";
 
 const mainSkills = [
-  { name: "C#", icon: "/icons/skills/csharp.svg" },
-  { name: ".NET", icon: "/icons/skills/dotnet.svg" },
-  { name: "Java", icon: "/icons/skills/java.svg" },
-  { name: "JavaScript", icon: "/icons/skills/javascript.svg" },
-  { name: "TypeScript", icon: "/icons/skills/typescript.svg" },
-  { name: "NodeJS", icon: "/icons/skills/nodejs.svg" },
-  { name: "Express.JS", icon: "/icons/skills/expressjs.svg" },
-  { name: "NestJS", icon: "/icons/skills/nestjs.svg" },
-  { name: "MongoDB", icon: "/icons/skills/mongodb.svg" },
-  { name: "MS SQL Server", icon: "/icons/skills/mssql.svg" },
-  { name: "PostgreSQL", icon: "/icons/skills/postgresql.svg" },
+  { name: ".NET", icon: "/images/skills/dotnet.svg" },
+  { name: "Java", icon: "/images/skills/java.svg" },
+  { name: "JavaScript", icon: "/images/skills/javascript.svg" },
+  { name: "TypeScript", icon: "/images/skills/typescript.svg" },
+  { name: "NodeJS", icon: "/images/skills/nodejs.svg" },
+  { name: "NestJS", icon: "/images/skills/nestjs.svg" },
+  { name: "MongoDB", icon: "/images/skills/mongodb.svg" },
+  { name: "MS SQL Server", icon: "/images/skills/mssql.svg" },
+  { name: "PostgreSQL", icon: "/images/skills/postgresql.svg" },
 ];
 
 const extraSkills = [
-  { name: "React", icon: "/icons/skills/react.svg" },
-  { name: "MUI5", icon: "/icons/skills/mui.svg" },
-  { name: "Redux", icon: "/icons/skills/redux.svg" },
-  { name: "Redux-Toolkit", icon: "/icons/skills/redux-toolkit.svg" },
-  { name: "Prisma", icon: "/icons/skills/prisma.svg" },
-  { name: "HTML5", icon: "/icons/skills/html5.svg" },
-  { name: "CSS3", icon: "/icons/skills/css3.svg" },
-  { name: "Sass", icon: "/icons/skills/sass.svg" },
-  { name: "Tailwind", icon: "/icons/skills/tailwindcss.svg" },
-  { name: "Bootstrap", icon: "/icons/skills/bootstrap.svg" },
-  { name: "jQuery", icon: "/icons/skills/jquery.svg" },
-  { name: "Git", icon: "/icons/skills/git.svg" },
-  { name: "Figma", icon: "/icons/skills/figma.svg" },
+  { name: "React", icon: "/images/skills/react.svg" },
+  { name: "MUI5", icon: "/images/skills/mui.svg" },
+  { name: "Redux", icon: "/images/skills/redux.svg" },
+  { name: "Prisma", icon: "/images/skills/prisma.svg" },
+  { name: "Sass", icon: "/images/skills/sass.svg" },
+  { name: "Tailwind", icon: "/images/skills/tailwindcss.svg" },
+  { name: "Bootstrap", icon: "/images/skills/bootstrap.svg" },
+  { name: "jQuery", icon: "/images/skills/jquery.svg" },
+  { name: "Git", icon: "/images/skills/git.svg" },
+  { name: "Figma", icon: "/images/skills/figma.svg" },
+  { name: "Linux", icon: "/images/skills/linux.svg" },
 ];
 
 interface SkillCardProps {
