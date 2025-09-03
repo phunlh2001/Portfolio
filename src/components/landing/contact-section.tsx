@@ -11,9 +11,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Send, Phone, Mail, GraduationCap, Home, MapPin } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Send, Phone, Mail, GraduationCap, Home, MapPin, User, FileText, MessageSquare } from "lucide-react";
 import { PUBLIC_KEY, SERVICE_ID, TEMPLATE_ID } from "@/lib/env";
+import { Separator } from "@/components/ui/separator";
 
 const contactSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters."),
@@ -72,103 +73,108 @@ export function ContactSection() {
   };
 
   return (
-    <section id="contact" className="w-full py-16 md:py-24 lg:py-32 bg-secondary">
-      <div className="container mx-auto px-4 max-w-6xl">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Contact Me</h2>
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <Card className="lg:col-span-2">
-            <CardHeader>
-              <CardTitle>Send a Message</CardTitle>
-              <CardDescription>
-                Have a question or a project in mind? Let's talk.
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <Form {...form}>
-                <form ref={formRef} onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                  <FormField
-                    control={form.control}
-                    name="name"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Name</FormLabel>
-                        <FormControl>
-                          <Input placeholder="Your Name" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="subject"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Subject</FormLabel>
-                        <FormControl>
-                          <Input placeholder="What is this about?" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="content"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Message</FormLabel>
-                        <FormControl>
-                          <Textarea placeholder="Your message..." rows={5} {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <Button type="submit" className="w-full" disabled={isSending}>
-                    {isSending ? "Sending..." : "Send Message"}
-                    <Send className="ml-2 h-4 w-4" />
-                  </Button>
-                </form>
-              </Form>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle>Contact Information</CardTitle>
-              <CardDescription>
-                You can also reach me directly through the details below.
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <ul className="space-y-4 text-sm">
-                <li className="flex items-center gap-3">
-                  <Phone className="h-5 w-5 text-primary"/>
-                  <span className="text-muted-foreground">0396384095</span>
-                </li>
-                <li className="flex items-center gap-3">
-                  <Mail className="h-5 w-5 text-primary"/>
-                  <a href="mailto:phunlh2001@gmail.com" className="text-muted-foreground hover:text-primary transition-colors">
-                    phunlh2001@gmail.com
-                  </a>
-                </li>
-                <li className="flex items-center gap-3">
-                  <GraduationCap className="h-5 w-5 text-primary"/>
-                  <span className="text-muted-foreground">7.9 (FPT University)</span>
-                </li>
-                <li className="flex items-center gap-3">
-                  <Home className="h-5 w-5 text-primary"/>
-                  <span className="text-muted-foreground">From: Dong Thap</span>
-                </li>
-                 <li className="flex items-center gap-3">
-                  <MapPin className="h-5 w-5 text-primary"/>
-                  <span className="text-muted-foreground">Based in: Can Tho</span>
-                </li>
-              </ul>
-            </CardContent>
-          </Card>
+    <section id="contact" className="w-full py-16 md:py-24 lg:py-32 bg-background">
+      <div className="container mx-auto px-4 max-w-5xl">
+        <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tighter">Get In Touch</h2>
+            <p className="mt-4 text-lg text-muted-foreground">Have a question or a project in mind? I'd love to hear from you.</p>
         </div>
+
+        <Card className="overflow-hidden">
+            <div className="grid grid-cols-1 md:grid-cols-2">
+                {/* Form Section */}
+                <div className="p-8">
+                    <h3 className="text-2xl font-bold mb-6">Send Me a Message</h3>
+                    <Form {...form}>
+                        <form ref={formRef} onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                            <FormField
+                                control={form.control}
+                                name="name"
+                                render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel className="flex items-center"><User className="mr-2 h-4 w-4"/>Name</FormLabel>
+                                    <FormControl>
+                                    <Input placeholder="Your Name" {...field} />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name="subject"
+                                render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel className="flex items-center"><FileText className="mr-2 h-4 w-4"/>Subject</FormLabel>
+                                    <FormControl>
+                                    <Input placeholder="What is this about?" {...field} />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name="content"
+                                render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel className="flex items-center"><MessageSquare className="mr-2 h-4 w-4"/>Message</FormLabel>
+                                    <FormControl>
+                                    <Textarea placeholder="Your message..." rows={5} {...field} />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                                )}
+                            />
+                            <Button type="submit" className="w-full" disabled={isSending}>
+                                {isSending ? "Sending..." : "Send Message"}
+                                <Send className="ml-2 h-4 w-4" />
+                            </Button>
+                        </form>
+                    </Form>
+                </div>
+                
+                {/* Info Section */}
+                <div className="bg-secondary p-8">
+                    <h3 className="text-2xl font-bold mb-6">Contact Information</h3>
+                    <p className="text-muted-foreground mb-8">
+                        Feel free to reach out to me through any of the following channels. I'm always open to discussing new projects, creative ideas, or opportunities to be part of your visions.
+                    </p>
+                    <ul className="space-y-6 text-sm">
+                        <li className="flex items-start gap-4">
+                            <Phone className="h-5 w-5 text-primary mt-1 flex-shrink-0"/>
+                            <div>
+                                <h4 className="font-semibold">Phone</h4>
+                                <span className="text-muted-foreground">0396384095</span>
+                            </div>
+                        </li>
+                        <li className="flex items-start gap-4">
+                            <Mail className="h-5 w-5 text-primary mt-1 flex-shrink-0"/>
+                             <div>
+                                <h4 className="font-semibold">Email</h4>
+                                <a href="mailto:phunlh2001@gmail.com" className="text-muted-foreground hover:text-primary transition-colors">
+                                    phunlh2001@gmail.com
+                                </a>
+                            </div>
+                        </li>
+                        <li className="flex items-start gap-4">
+                            <MapPin className="h-5 w-5 text-primary mt-1 flex-shrink-0"/>
+                             <div>
+                                <h4 className="font-semibold">Location</h4>
+                                <span className="text-muted-foreground">From Dong Thap, based in Can Tho</span>
+                            </div>
+                        </li>
+                        <li className="flex items-start gap-4">
+                            <GraduationCap className="h-5 w-5 text-primary mt-1 flex-shrink-0"/>
+                            <div>
+                                <h4 className="font-semibold">Education</h4>
+                                <span className="text-muted-foreground">7.9 GPA from FPT University</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </Card>
       </div>
     </section>
   );
