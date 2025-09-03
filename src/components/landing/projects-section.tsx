@@ -110,7 +110,7 @@ export function ProjectsSection() {
                       <p className="text-muted-foreground text-sm mb-4">{project.description}</p>
                       <div className="flex flex-wrap gap-2">
                         {project.tags.map((tag) => (
-                          <Badge key={tag} variant="secondary">{tag}</Badge>
+                          <Badge key={tag} variant="outline">{tag}</Badge>
                         ))}
                       </div>
                     </CardContent>
