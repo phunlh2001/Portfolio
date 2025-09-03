@@ -11,8 +11,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Send } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Send, Phone, Mail, GraduationCap, Home, MapPin } from "lucide-react";
 import { PUBLIC_KEY, SERVICE_ID, TEMPLATE_ID } from "@/lib/env";
 
 const contactSchema = z.object({
@@ -73,61 +73,102 @@ export function ContactSection() {
 
   return (
     <section id="contact" className="w-full py-16 md:py-24 lg:py-32 bg-secondary">
-      <div className="container mx-auto px-4 max-w-2xl">
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-3xl md:text-4xl font-bold text-center">Contact Me</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <Form {...form}>
-              <form ref={formRef} onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                <FormField
-                  control={form.control}
-                  name="name"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Name</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Your Name" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="subject"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Subject</FormLabel>
-                      <FormControl>
-                        <Input placeholder="What is this about?" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="content"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Message</FormLabel>
-                      <FormControl>
-                        <Textarea placeholder="Your message..." rows={5} {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <Button type="submit" className="w-full" disabled={isSending}>
-                  {isSending ? "Sending..." : "Send Message"}
-                  <Send className="ml-2 h-4 w-4" />
-                </Button>
-              </form>
-            </Form>
-          </CardContent>
-        </Card>
+      <div className="container mx-auto px-4 max-w-6xl">
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Contact Me</h2>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <Card className="lg:col-span-2">
+            <CardHeader>
+              <CardTitle>Send a Message</CardTitle>
+              <CardDescription>
+                Have a question or a project in mind? Let's talk.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Form {...form}>
+                <form ref={formRef} onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                  <FormField
+                    control={form.control}
+                    name="name"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Name</FormLabel>
+                        <FormControl>
+                          <Input placeholder="Your Name" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="subject"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Subject</FormLabel>
+                        <FormControl>
+                          <Input placeholder="What is this about?" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="content"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Message</FormLabel>
+                        <FormControl>
+                          <Textarea placeholder="Your message..." rows={5} {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <Button type="submit" className="w-full" disabled={isSending}>
+                    {isSending ? "Sending..." : "Send Message"}
+                    <Send className="ml-2 h-4 w-4" />
+                  </Button>
+                </form>
+              </Form>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>Contact Information</CardTitle>
+              <CardDescription>
+                You can also reach me directly through the details below.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <ul className="space-y-4 text-sm">
+                <li className="flex items-center gap-3">
+                  <Phone className="h-5 w-5 text-primary"/>
+                  <span className="text-muted-foreground">0396384095</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <Mail className="h-5 w-5 text-primary"/>
+                  <a href="mailto:phunlh2001@gmail.com" className="text-muted-foreground hover:text-primary transition-colors">
+                    phunlh2001@gmail.com
+                  </a>
+                </li>
+                <li className="flex items-center gap-3">
+                  <GraduationCap className="h-5 w-5 text-primary"/>
+                  <span className="text-muted-foreground">7.9 (FPT University)</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <Home className="h-5 w-5 text-primary"/>
+                  <span className="text-muted-foreground">From: Dong Thap</span>
+                </li>
+                 <li className="flex items-center gap-3">
+                  <MapPin className="h-5 w-5 text-primary"/>
+                  <span className="text-muted-foreground">Based in: Can Tho</span>
+                </li>
+              </ul>
+            </CardContent>
+          </Card>
+        </div>
       </div>
     </section>
   );
