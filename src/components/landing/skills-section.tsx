@@ -67,12 +67,6 @@ export function SkillsSection() {
       if (projectsSection) {
         projectsSection.scrollIntoView({ behavior: "smooth" });
       }
-    } else {
-        // Optional: handle case where no project is found for the skill
-        const projectsSection = document.getElementById("projects");
-        if (projectsSection) {
-            projectsSection.scrollIntoView({ behavior: "smooth" });
-        }
     }
   };
 
