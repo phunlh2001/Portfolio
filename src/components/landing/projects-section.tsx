@@ -1,3 +1,5 @@
+"use client"
+
 import Image from "next/image";
 import Link from "next/link";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -10,9 +12,12 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
+  type CarouselApi,
 } from "@/components/ui/carousel";
+import { useEffect, useState } from "react";
+import { useProjectFocusStore } from "@/lib/store";
 
-const projects = [
+export const projects = [
   {
     title: "Random Color",
     description: "A simple tool that generates random colors to help users quickly find suitable color codes for backgrounds or design ideas.",
@@ -32,7 +37,7 @@ const projects = [
     title: "PlantMed",
     description: "A capstone project that leverages AI and custom-trained models to identify medicinal plants through photos, providing insights into their benefits and potential side effects.",
     image: "/images/projects/plantmed.png",
-    tags: ["ReactJS", "React-Native", ".NET 5", "Redux", "Redux-Toolkit", "MUI5", "Python", "FastAPI", "YOLO8", "AI", "SQL Server", "Firebase"],
+    tags: ["ReactJS", "React-Native", ".NET", "Redux", "Redux-Toolkit", "MUI5", "Python", "FastAPI", "YOLO8", "AI", "SQL Server", "Firebase"],
     liveUrl: "https://plantmed.netlify.app/",
     githubUrl: "https://github.com/PlantMed-Capstone-Project"
   },
@@ -77,6 +82,18 @@ const projects = [
 ];
 
 export function ProjectsSection() {
+  const [api, setApi] = useState<CarouselApi>();
+  const { focusedProjectIndex, setFocusedProjectIndex } = useProjectFocusStore();
+
+  useEffect(() => {
+    if (api && focusedProjectIndex !== null) {
+      api.scrollTo(focusedProjectIndex);
+      // Reset the focused index after scrolling
+      setFocusedProjectIndex(null);
+    }
+  }, [api, focusedProjectIndex, setFocusedProjectIndex]);
+
+
   return (
     <section id="projects" className="w-full py-16 md:py-24 lg:py-32 bg-secondary">
       <div className="container mx-auto px-4">
@@ -84,6 +101,7 @@ export function ProjectsSection() {
           My Projects
         </h2>
         <Carousel
+          setApi={setApi}
           opts={{
             align: "start",
             loop: true,
