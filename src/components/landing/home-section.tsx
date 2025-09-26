@@ -13,6 +13,7 @@ export function HomeSection() {
   const texts = [
     "I am a Junior Backend Developer",
     "I am interested in AI",
+    "I am learning about Cyber Security",
     "I like reading books and playing video games"
   ];
 
